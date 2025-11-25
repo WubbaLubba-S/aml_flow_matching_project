@@ -8,8 +8,8 @@ import sys
 sys.path.append('.')
 
 from models.unet import TinyUNet, count_parameters
-from training.cfm_trainer import ConditionalFlowMatcher, sample_cfm
-from training.ddpm_trainer import DDPMNoiseSchedule, DDPM, sample_ddpm
+from trainer.cfm_trainer import ConditionalFlowMatcher, sample_cfm
+from trainer.ddpm_trainer import DDPMNoiseSchedule, DDPM, sample_ddpm
 
 print("=" * 60)
 print("Testing Tiny UNet Architecture")
