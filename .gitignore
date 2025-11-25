@@ -11,4 +11,3 @@ results/results_1.zip
 results/*/outputs_*/*9.pt
 outputs/*
 !outputs/inpainting
-evaluation_results

@@ -8,7 +8,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 from tqdm import tqdm
 import numpy as np
-
+import os
+import sys
 
 class ConditionalFlowMatcher:
     """
@@ -149,7 +150,7 @@ class CFMTrainer:
                     self.scaler.update()
                 else:
                     self.optimizer.step()
-                self.optimizer.zero_grad(set_to_none=True)  # ✅ Changed: set_to_none=True saves memory
+                self.optimizer.zero_grad(set_to_none=True)  
             
             # Logging - ensure we detach from graph
             with torch.no_grad():
@@ -157,11 +158,11 @@ class CFMTrainer:
             num_batches += 1
             pbar.set_postfix({'loss': total_loss / num_batches})
             
-            # ✅ NEW: Clear cache every 50 batches to prevent fragmentation
+            #  Clear cache every 50 batches to prevent fragmentation
             if batch_idx % 50 == 0:
                 torch.cuda.empty_cache()
         
-        # ✅ NEW: Clear cache at end of epoch
+        #  Clear cache at end of epoch
         torch.cuda.empty_cache()
         
         return total_loss / num_batches
@@ -286,6 +287,14 @@ def sample_cfm_rk4(
 
 if __name__ == "__main__":
     # Test flow matching
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+#  Get the parent folder (The root of your project)
+    parent_dir = os.path.dirname(current_dir)
+
+    #  Add paths so Python can see everything
+    sys.path.append(current_dir) 
+    sys.path.append(parent_dir)  
     from models.unet import TinyUNet
     
     model = TinyUNet()

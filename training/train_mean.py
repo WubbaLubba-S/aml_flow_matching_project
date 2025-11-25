@@ -24,6 +24,16 @@ import json
 # Import custom modules
 import sys
 sys.path.append('.')
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+#  Get the parent folder (The root of your project)
+parent_dir = os.path.dirname(current_dir)
+
+#  Add paths so Python can see everything
+sys.path.append(current_dir) 
+sys.path.append(parent_dir)  
+
 from models.unet_mean import TinyUNetMeanFlow, count_parameters
 from trainer.mean_trainer import (
     MeanFlowMatcher, 

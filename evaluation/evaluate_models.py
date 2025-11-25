@@ -32,12 +32,12 @@ sys.path.append('.')
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# 2. Get the parent folder (The root of your project)
+#  Get the parent folder (The root of your project)
 parent_dir = os.path.dirname(current_dir)
 
-# 3. Add paths so Python can see everything
-sys.path.append(current_dir) # Allows seeing 'models'
-sys.path.append(parent_dir)  # Allows seeing 'training'
+#  Add paths so Python can see everything
+sys.path.append(current_dir) 
+sys.path.append(parent_dir)  
 
 
 from models.unet import TinyUNet
@@ -943,9 +943,9 @@ def main():
     print("=" * 60)
     print(json.dumps(results, indent=2))
     print("=" * 60)
-    print(f"\n✓ Results saved to: {results_file}")
-    print(f"✓ Sample grids saved to: {output_dir}")
-    print("\nEvaluation complete! 🎉\n")
+    print(f"\n Results saved to: {results_file}")
+    print(f" Sample grids saved to: {output_dir}")
+    print("\nEvaluation complete!\n")
 
 
 if __name__ == '__main__':

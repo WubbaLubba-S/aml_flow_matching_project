@@ -23,18 +23,17 @@ import json
 import scipy
 import os
 
-# Import MeanFlow model and sampling
 import sys
 sys.path.append('.')
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# 2. Get the parent folder (The root of your project)
+# Get the parent folder (The root of your project)
 parent_dir = os.path.dirname(current_dir)
 
-# 3. Add paths so Python can see everything
-sys.path.append(current_dir) # Allows seeing 'models'
-sys.path.append(parent_dir)  # Allows seeing 'training'
+# Add paths so Python can see everything
+sys.path.append(current_dir) 
+sys.path.append(parent_dir)  
 
 
 from models.unet_mean import TinyUNetMeanFlow, count_parameters
@@ -99,9 +98,7 @@ def load_meanflow_model(checkpoint_path, device='cuda'):
         dropout=config.get('dropout', 0.1),
     )
     
-    # ==============================================================================
-    # FIX: State Dict Adapter (Map Old Checkpoint Keys to New Model Architecture)
-    # ==============================================================================
+    # ================= Automatic State Dict Mapping =================
     raw_state_dict = checkpoint['model_state_dict']
     new_state_dict = {}
 
@@ -477,7 +474,7 @@ def evaluate_kid(sampler, num_samples=5000, num_subsets=100, subset_size=1000,
     kid_mean = np.mean(kid_scores)
     kid_std = np.std(kid_scores)
     
-    print(f"\n✓ KID Score (1-step): {kid_mean:.6f} ± {kid_std:.6f}")
+    print(f"\n KID Score (1-step): {kid_mean:.6f} ± {kid_std:.6f}")
     
     return kid_mean, kid_std
 
@@ -553,7 +550,7 @@ def evaluate_kid_per_class(sampler, samples_per_class=500, num_subsets=50, subse
         torch.cuda.empty_cache()
     
     avg_kid = np.mean([v['mean'] for v in kid_per_class.values()])
-    print(f"\n✓ Average per-class KID (1-step): {avg_kid:.6f}")
+    print(f"\n Average per-class KID (1-step): {avg_kid:.6f}")
     
     return kid_per_class
 
@@ -593,7 +590,7 @@ def measure_inference_speed(sampler, num_runs=100):
     std_time = np.std(times)
     throughput = batch_size / mean_time
     
-    print(f"\n✓ Inference Speed (1-step):")
+    print(f"\n Inference Speed (1-step):")
     print(f"  Mean time: {mean_time*1000:.2f} ± {std_time*1000:.2f} ms")
     print(f"  Throughput: {throughput:.2f} images/sec")
     
@@ -619,7 +616,7 @@ def measure_memory_usage(sampler, device='cuda'):
     
     peak_memory = torch.cuda.max_memory_allocated(device) / (1024 ** 3)  # GB
     
-    print(f"\n✓ Peak memory usage (1-step): {peak_memory:.2f} GB")
+    print(f"\n Peak memory usage (1-step): {peak_memory:.2f} GB")
     
     return float(peak_memory)
 
@@ -653,7 +650,7 @@ def generate_sample_grids(sampler, output_dir, cfg_scale=2.0, device='cuda'):
             nrow=8, normalize=False
         )
     
-    print(f"✓ Sample grids saved to: {output_dir}")
+    print(f" Sample grids saved to: {output_dir}")
 
 
 def main():
@@ -797,9 +794,9 @@ def main():
     print("=" * 60)
     print(json.dumps(results, indent=2))
     print("=" * 60)
-    print(f"\n✓ Results saved to: {results_file}")
+    print(f"\n Results saved to: {results_file}")
     print(f"✓ Samples saved to: {output_dir}")
-    print("\n🎉 MeanFlow Evaluation complete! 🎉\n")
+    print("\n MeanFlow Evaluation complete! \n")
     print("Note: All sampling was 1-step (no ODE integration required!)")
     print("=" * 60)
 

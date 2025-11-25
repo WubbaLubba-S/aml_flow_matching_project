@@ -14,6 +14,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from tqdm import tqdm
 import numpy as np
+import os
 
 # Import JVP for MeanFlow Identity computation
 from torch.func import jvp as torch_jvp
@@ -378,6 +379,14 @@ if __name__ == "__main__":
     # Test MeanFlow matching
     import sys
     sys.path.append('.')
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+#  Get the parent folder (The root of your project)
+    parent_dir = os.path.dirname(current_dir)
+
+    #  Add paths so Python can see everything
+    sys.path.append(current_dir) 
+    sys.path.append(parent_dir)  
     from models.unet_mean import TinyUNetMeanFlow
     
     model = TinyUNetMeanFlow()
@@ -397,6 +406,6 @@ if __name__ == "__main__":
     print(f"Sample range: [{samples.min():.2f}, {samples.max():.2f}]")
     
     print("\n✓ MeanFlow matching tests passed!")
-    print("  ✓ JVP computation works")
-    print("  ✓ Loss computation works")
-    print("  ✓ 1-step sampling works")
+    print("   JVP computation works")
+    print("   Loss computation works")
+    print("   1-step sampling works")

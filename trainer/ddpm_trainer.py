@@ -9,6 +9,8 @@ import torch.nn.functional as F
 from tqdm import tqdm
 import numpy as np
 import math
+import os
+import sys
 
 
 class DDPMNoiseSchedule:
@@ -293,6 +295,14 @@ def sample_ddpm(
 
 if __name__ == "__main__":
     # Test DDPM
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+#  Get the parent folder (The root of your project)
+    parent_dir = os.path.dirname(current_dir)
+
+    #  Add paths so Python can see everything
+    sys.path.append(current_dir) 
+    sys.path.append(parent_dir)  
     from models.unet import TinyUNet
     
     model = TinyUNet()

@@ -119,7 +119,7 @@ def demo_inpainting(args):
     class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 
                    'dog', 'frog', 'horse', 'ship', 'truck']
     label_names = [class_names[l.item()] for l in labels]
-    print(f"✓ Images loaded, classes: {label_names}\n")
+    print(f" Images loaded, classes: {label_names}\n")
     
     # Create mask generator
     mask_gen = InpaintingMaskGenerator()
@@ -191,10 +191,10 @@ def demo_inpainting(args):
         vis = (vis + 1) / 2  # Scale from [-1, 1] to [0, 1]
         save_path = output_dir / f'inpainting_{mask_name}.png'
         torchvision.utils.save_image(vis, save_path, nrow=1, padding=2)
-        print(f"  ✓ Saved to {save_path}\n")
+        print(f"   Saved to {save_path}\n")
     
     print("=" * 60)
-    print("Inpainting complete! 🎉")
+    print("Inpainting complete! ")
     print(f"Results saved to: {output_dir}")
     print(f"\nEach image shows: [Original | Masked | Mask | Inpainted]")
     print("=" * 60)
@@ -256,7 +256,7 @@ def demo_interactive(args):
     
     save_path = output_dir / f'inpainting_interactive_{args.mask_type}.png'
     torchvision.utils.save_image(vis, save_path, nrow=1, padding=2)
-    print(f"✓ Saved to {save_path}")
+    print(f" Saved to {save_path}")
 
 
 def main():

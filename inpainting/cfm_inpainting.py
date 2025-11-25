@@ -416,4 +416,4 @@ if __name__ == "__main__":
     vis = visualize_inpainting(image, masked_image, inpainted, bbox_mask)
     print(f"   Visualization shape: {vis.shape}")
     
-    print("\n✓ All inpainting tests passed!")
+    print("\n All inpainting tests passed!")
