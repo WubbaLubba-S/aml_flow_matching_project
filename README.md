@@ -83,7 +83,7 @@ MeanFlow achieves comparable quality with **50× fewer function evaluations**:
 DDPM with our TinyUNet architecture fails to converge, even after 400 epochs:
 
 <p align="center">
-<img src="figures/ddpm_samples_epoch_399.png" width="400" alt="DDPM failure">
+<img src="figures/samples_epoch_399.png" width="400" alt="DDPM failure">
 <br><i>DDPM samples at epoch 399 — model fails to learn meaningful representations</i>
 </p>
 
